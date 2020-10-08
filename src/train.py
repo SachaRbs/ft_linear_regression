@@ -22,14 +22,13 @@ class LinearRegression():
 		self.iterations = iterations
 		self.theta = np.zeros((1, 2))
 		self.m = m
-
+	
 	def fit(self, X, y):
 		for i in range(0, self.iterations):
 			tmp_theta = np.zeros((1, 2))
-			for j in range(0, self.m):
-				tmp_theta[0, 0] += (self.predict(X[j]) - y[j])
-				tmp_theta[0, 1] += ((self.predict(X[j]) - y[j]) * X[j])
-			self.theta -= (tmp_theta * self.alpha) / self.m
+			tmp_theta[0, 0] = (self.alpha * np.sum(self.predict(X) - y)) / self.m
+			tmp_theta[0, 1] = (self.alpha * np.sum((self.predict(X) - y) * X)) / self.m
+			self.theta -= tmp_theta
 
 	def _mse(self, y, y_pred):
 		res = (np.sum(y) - np.sum(y_pred))**2 / len(y)
@@ -64,7 +63,7 @@ def main():
 	X = destandardize(X, data[:, 0])
 	model.save_theta(X, y)
 
-	# plot_data(data, X, y)
+	plot_data(data, X, y)
 
 	
 
