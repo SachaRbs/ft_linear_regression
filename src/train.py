@@ -12,8 +12,8 @@ def destandardize(x, x_ref):
 def plot_data(data, x, y):
 	plt.plot(data[:, 0], data[:, 1], 'o')
 	plt.plot(x, y)
-	plt.ylabel("Price")
 	plt.xlabel("Km")
+	plt.ylabel("Price")
 	plt.show()
 
 class LinearRegression():
